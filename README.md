@@ -2,12 +2,14 @@
 
 > **An intelligent form builder that transforms natural language descriptions into beautiful, functional React forms with validation**
 
+[![CI/CD Pipeline](https://github.com/ArieGoldkin/al-ui-components-creator/actions/workflows/ci.yml/badge.svg)](https://github.com/ArieGoldkin/al-ui-components-creator/actions/workflows/ci.yml)
 [![React](https://img.shields.io/badge/React-19.1.0-blue.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-blue.svg)](https://www.typescriptlang.org/)
 [![Flask](https://img.shields.io/badge/Flask-2.3.3-green.svg)](https://flask.palletsprojects.com/)
 [![Python](https://img.shields.io/badge/Python-3.9+-green.svg)](https://www.python.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.0-38B2AC.svg)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Code Quality](https://img.shields.io/badge/Code%20Quality-ESLint%20%7C%20Prettier%20%7C%20Black-brightgreen.svg)](https://github.com/ArieGoldkin/al-ui-components-creator/actions/workflows/ci.yml)
 
 ## ✨ Features
 
@@ -323,6 +325,38 @@ graph TB
 - 🤖 **Anthropic Claude** - Advanced AI for form generation
 - 🔄 **Flask-CORS** - Cross-origin resource sharing
 - 🔐 **python-dotenv** - Environment variable management
+
+## 🚀 CI/CD Pipeline
+
+Our comprehensive GitHub Actions workflow ensures code quality and reliability:
+
+### **Pipeline Features:**
+
+- **🔄 Multi-Environment Testing**: Tests on Node.js 18.x & 20.x, Python 3.9-3.11
+- **⚡ Parallel Execution**: Frontend and backend jobs run simultaneously
+- **🗄️ Smart Caching**: pnpm and pip dependencies cached for faster builds
+- **🔍 Code Quality**: ESLint, Prettier, Black, Flake8, and type checking
+- **🧪 Comprehensive Testing**: Unit tests, integration tests, and security audits
+- **📊 Build Verification**: Ensures both frontend build and backend startup work
+
+### **Workflow Triggers:**
+
+- Push to `main` branch
+- Pull requests to `main` branch
+- Push to feature branches (like `feature/ui-ux-modernization`)
+- Manual workflow dispatch
+
+### **Pipeline Jobs:**
+
+1. **Frontend CI** - TypeScript type checking, ESLint linting, Prettier formatting, React build
+2. **Backend CI** - Python code quality checks, Flask app validation, dependency testing
+3. **Integration Tests** - Full-stack testing with real backend/frontend interaction
+4. **Security Audit** - Dependency vulnerability scanning for both frontend and backend
+5. **Build Summary** - Comprehensive pipeline status reporting
+
+### **Status Monitoring:**
+
+Check the current build status: [![CI/CD Pipeline](https://github.com/ArieGoldkin/al-ui-components-creator/actions/workflows/ci.yml/badge.svg)](https://github.com/ArieGoldkin/al-ui-components-creator/actions/workflows/ci.yml)
 
 ## 🎨 UI/UX Highlights
 
