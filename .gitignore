@@ -9,7 +9,7 @@ lerna-debug.log*
 # Package manager lock files
 package-lock.json
 yarn.lock
-pnpm-lock.yaml
+/pnpm-lock.yaml
 
 # Build outputs
 dist/
