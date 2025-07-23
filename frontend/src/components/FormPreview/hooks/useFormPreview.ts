@@ -5,7 +5,7 @@ import { createValidationSchema } from "../utils";
 
 export const useFormPreview = (formSchema: FormSchema) => {
   const validationSchema = createValidationSchema(formSchema.fields);
-  
+
   const {
     register,
     handleSubmit,
