@@ -2,7 +2,7 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [main]
+    branches: [main, feature/ui-ux-modernization]
   pull_request:
     branches: [main]
 
@@ -71,19 +71,7 @@ jobs:
           FLASK_ENV: testing
           ANTHROPIC_API_KEY: test_key_for_ci
         run: |
-          python -c "
-          import sys
-          sys.path.append('.')
-          try:
-              from app import app
-              print('✅ Flask app imported successfully')
-              with app.test_client() as client:
-                  response = client.get('/health')
-                  print(f'✅ Health endpoint responded with status: {response.status_code}')
-          except Exception as e:
-              print(f'❌ Flask app startup failed: {e}')
-              sys.exit(1)
-          "
+          python -c "import sys; sys.path.append('.'); from app import app; print('✅ Flask app imported successfully'); client = app.test_client(); response = client.get('/health'); print(f'✅ Health endpoint responded with status: {response.status_code}')"
 
       - name: 🧪 Run backend tests
         working-directory: ./backend
