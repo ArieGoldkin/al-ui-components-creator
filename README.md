@@ -326,37 +326,32 @@ graph TB
 - 🔄 **Flask-CORS** - Cross-origin resource sharing
 - 🔐 **python-dotenv** - Environment variable management
 
-## 🚀 CI/CD Pipeline
+## 🚀 CI Pipeline
 
-Our comprehensive GitHub Actions workflow ensures code quality and reliability:
+Our lean and efficient GitHub Actions workflow focuses on essential quality checks:
 
 ### **Pipeline Features:**
 
-- **🔄 Multi-Environment Testing**: Tests on Node.js 18.x & 20.x, Python 3.9-3.11
-- **⚡ Parallel Execution**: Frontend and backend jobs run simultaneously
-- **🗄️ Smart Caching**: pnpm and pip dependencies cached for faster builds
-- **🔍 Code Quality**: ESLint, Prettier, Black, Flake8, and type checking
-- **🧪 Comprehensive Testing**: Unit tests, integration tests, and security audits
-- **📊 Build Verification**: Ensures both frontend build and backend startup work
+- **🎯 Single Environment**: Tests on Node.js 20.x and Python 3.11 (production versions)
+- **⚡ Sequential Execution**: Single job with optimized step order for faster feedback
+- **🗄️ Smart Caching**: Combined pnpm and pip dependency caching
+- **🔍 Essential Checks**: TypeScript compilation, ESLint linting, and Flask validation
+- **🏗️ Build Verification**: Ensures frontend builds and backend starts correctly
 
 ### **Workflow Triggers:**
 
 - Push to `main` branch
 - Pull requests to `main` branch
-- Push to feature branches (like `feature/ui-ux-modernization`)
-- Manual workflow dispatch
 
-### **Pipeline Jobs:**
+### **Pipeline Steps:**
 
-1. **Frontend CI** - TypeScript type checking, ESLint linting, Prettier formatting, React build
-2. **Backend CI** - Python code quality checks, Flask app validation, dependency testing
-3. **Integration Tests** - Full-stack testing with real backend/frontend interaction
-4. **Security Audit** - Dependency vulnerability scanning for both frontend and backend
-5. **Build Summary** - Comprehensive pipeline status reporting
+1. **Setup** - Node.js 20.x, Python 3.11, pnpm, dependency caching
+2. **Frontend** - Install dependencies, TypeScript type checking, ESLint linting, React build
+3. **Backend** - Install dependencies, Flask app startup validation, basic tests
 
 ### **Status Monitoring:**
 
-Check the current build status: [![CI/CD Pipeline](https://github.com/ArieGoldkin/al-ui-components-creator/actions/workflows/ci.yml/badge.svg)](https://github.com/ArieGoldkin/al-ui-components-creator/actions/workflows/ci.yml)
+Check the current build status: [![CI Pipeline](https://github.com/ArieGoldkin/al-ui-components-creator/actions/workflows/ci.yml/badge.svg)](https://github.com/ArieGoldkin/al-ui-components-creator/actions/workflows/ci.yml)
 
 ## 🎨 UI/UX Highlights
 
