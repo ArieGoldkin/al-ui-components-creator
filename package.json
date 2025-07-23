@@ -1,0 +1,67 @@
+{
+  "name": "ai-form-creator",
+  "version": "1.0.0",
+  "description": "AI-powered form builder with React frontend and Python Flask backend",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm run dev:fullstack",
+    "dev:fullstack": "concurrently --kill-others --prefix-colors \"cyan,magenta\" --names \"backend,frontend\" \"pnpm run dev:backend\" \"pnpm run dev:frontend\"",
+    "dev:backend": "source augment/bin/activate && cd backend && python app.py",
+    "dev:frontend": "cd frontend && pnpm run dev",
+    "dev:backend-only": "source augment/bin/activate && cd backend && python app.py",
+    "dev:frontend-only": "cd frontend && pnpm run dev",
+    "start": "pnpm run dev:fullstack",
+    "build": "pnpm run build:frontend",
+    "build:frontend": "cd frontend && pnpm run build",
+    "preview": "cd frontend && pnpm run preview",
+    "install:all": "pnpm run install:backend && pnpm run install:frontend",
+    "install:backend": "source augment/bin/activate && pip install -r backend/requirements.txt",
+    "install:frontend": "cd frontend && pnpm install",
+    "backend:setup": "python3 -m venv augment && pnpm run install:backend",
+    "lint": "pnpm run lint:frontend",
+    "lint:frontend": "cd frontend && pnpm run lint",
+    "lint:fix": "cd frontend && pnpm run lint:fix",
+    "test": "pnpm run test:frontend",
+    "test:frontend": "cd frontend && pnpm run test",
+    "clean": "pnpm run clean:frontend && pnpm run clean:backend",
+    "clean:frontend": "cd frontend && rm -rf node_modules dist",
+    "clean:backend": "find . -name '__pycache__' -type d -exec rm -rf {} + 2>/dev/null || true",
+    "clean:all": "pnpm run clean && rm -rf augment",
+    "check:health": "pnpm run check:backend && pnpm run check:frontend",
+    "check:backend": "curl -f http://localhost:5001/health || echo 'Backend not running'",
+    "check:frontend": "curl -f http://localhost:3000 || echo 'Frontend not running'",
+    "logs:backend": "tail -f backend/app.log 2>/dev/null || echo 'No backend logs found'",
+    "setup": "pnpm run backend:setup && pnpm run install:frontend",
+    "reset": "pnpm run clean:all && pnpm run setup",
+    "format": "cd frontend && pnpm run format",
+    "type-check": "cd frontend && pnpm run type-check",
+    "deps:update": "pnpm update && cd frontend && pnpm update",
+    "deps:audit": "pnpm audit && cd frontend && pnpm audit",
+    "info": "echo 'AI Form Creator - Development Environment' && echo 'Frontend: http://localhost:3000' && echo 'Backend: http://localhost:5001' && echo 'Health: http://localhost:5001/health'"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.12.0",
+    "pnpm": ">=8.0.0",
+    "python": ">=3.9.0"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "keywords": [
+    "ai",
+    "form-builder",
+    "react",
+    "flask",
+    "python",
+    "typescript",
+    "tailwindcss",
+    "anthropic"
+  ],
+  "author": "AI Form Creator Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ArieGoldkin/al-ui-components-creator.git"
+  }
+}

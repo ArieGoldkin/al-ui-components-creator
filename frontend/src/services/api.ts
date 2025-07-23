@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 const API_BASE_URL = "http://localhost:5001";
 
@@ -114,7 +114,7 @@ export interface FormField {
   label: string;
   placeholder?: string;
   required: boolean;
-  validation?: Record<string, any>;
+  validation?: Record<string, unknown>;
   options?: string[];
 }
 
@@ -138,14 +138,48 @@ export interface ApiErrorResponse {
   error: ApiError;
 }
 
+const getLastUserMessage = (messages: ChatMessage[]): string => {
+  const lastUserMessage = messages.filter((m) => m.role === "user").pop();
+  return lastUserMessage?.content || "";
+};
+
+const handleApiError = async (
+  errorMessage: string,
+  messages: ChatMessage[]
+): Promise<ChatResponse> => {
+  if (errorMessage.includes("credit balance is too low")) {
+    const mockResponse = createMockResponse(getLastUserMessage(messages));
+    console.warn("API credits unavailable, using mock response");
+    return mockResponse;
+  } else if (errorMessage.includes("API key")) {
+    throw new Error("AI service configuration issue. Please contact support.");
+  } else {
+    throw new Error(errorMessage);
+  }
+};
+
+const handleAxiosError = async (
+  error: AxiosError,
+  messages: ChatMessage[]
+): Promise<ChatResponse> => {
+  if (error.code === "ECONNREFUSED") {
+    throw new Error(
+      "Unable to connect to the backend server. Please make sure it's running on port 5001."
+    );
+  }
+
+  const errorData = error.response?.data as ApiErrorResponse;
+  if (errorData?.error) {
+    return handleApiError(errorData.error.message, messages);
+  }
+
+  throw new Error(`Connection error: ${error.message}`);
+};
+
 export const chatApi = {
   async sendMessage(messages: ChatMessage[]): Promise<ChatResponse> {
-    // Use mock response in development mode
     if (USE_MOCK_RESPONSES) {
-      const lastUserMessage = messages.filter((m) => m.role === "user").pop();
-      const mockResponse = createMockResponse(lastUserMessage?.content || "");
-
-      // Simulate API delay
+      const mockResponse = createMockResponse(getLastUserMessage(messages));
       await new Promise((resolve) => setTimeout(resolve, 1000));
       return mockResponse;
     }
@@ -153,64 +187,17 @@ export const chatApi = {
     try {
       const response = await api.post<ChatResponse | ApiErrorResponse>(
         "/api/chat",
-        {
-          messages,
-        }
+        { messages }
       );
 
       if ("error" in response.data) {
-        const error = response.data.error;
-        // Provide more user-friendly error messages
-        if (error.message.includes("credit balance is too low")) {
-          // Fallback to mock response when API credits are unavailable
-          const lastUserMessage = messages
-            .filter((m) => m.role === "user")
-            .pop();
-          const mockResponse = createMockResponse(
-            lastUserMessage?.content || ""
-          );
-          console.warn("API credits unavailable, using mock response");
-          return mockResponse;
-        } else if (error.message.includes("API key")) {
-          throw new Error(
-            "AI service configuration issue. Please contact support."
-          );
-        } else {
-          throw new Error(error.message);
-        }
+        return handleApiError(response.data.error.message, messages);
       }
 
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if (error.code === "ECONNREFUSED") {
-          throw new Error(
-            "Unable to connect to the backend server. Please make sure it's running on port 5001."
-          );
-        }
-
-        const errorData = error.response?.data as ApiErrorResponse;
-        if (errorData?.error) {
-          // Apply the same user-friendly error handling
-          if (errorData.error.message.includes("credit balance is too low")) {
-            // Fallback to mock response when API credits are unavailable
-            const lastUserMessage = messages
-              .filter((m) => m.role === "user")
-              .pop();
-            const mockResponse = createMockResponse(
-              lastUserMessage?.content || ""
-            );
-            console.warn("API credits unavailable, using mock response");
-            return mockResponse;
-          } else if (errorData.error.message.includes("API key")) {
-            throw new Error(
-              "AI service configuration issue. Please contact support."
-            );
-          } else {
-            throw new Error(errorData.error.message);
-          }
-        }
-        throw new Error(`Connection error: ${error.message}`);
+        return handleAxiosError(error, messages);
       }
       throw error;
     }
@@ -220,7 +207,7 @@ export const chatApi = {
     try {
       const response = await api.get("/health");
       return response.data;
-    } catch (error) {
+    } catch {
       throw new Error("Backend server is not responding");
     }
   },
