@@ -17,11 +17,11 @@ export const EmptyState: React.FC<EmptyStateProps> = ({ className }) => {
       <div className="text-center">
         <FileText className="h-16 w-16 text-yellow-400 mx-auto mb-4" />
         <h3 className="text-lg font-medium text-yellow-900 mb-2">
-          No form fields generated
+          No component fields generated
         </h3>
         <p className="text-yellow-600 max-w-sm">
-          The form was generated but contains no fields. Try being more specific
-          about what fields you need.
+          The component was generated but contains no fields. Try being more
+          specific about what you need.
         </p>
       </div>
     </div>

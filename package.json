@@ -71,5 +71,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/ArieGoldkin/al-ui-components-creator.git"
+  },
+  "dependencies": {
+    "@tailwindcss/line-clamp": "^0.4.4"
   }
 }

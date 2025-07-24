@@ -5,12 +5,12 @@ import { cn } from "../../lib/utils";
 import { FormField, EmptyState } from "./components";
 import { useFormPreview } from "./hooks";
 
-interface FormPreviewProps {
+interface ComponentPreviewProps {
   formSchema: FormSchema | null;
   className?: string;
 }
 
-export const FormPreview: React.FC<FormPreviewProps> = ({
+export const ComponentPreview: React.FC<ComponentPreviewProps> = ({
   formSchema,
   className,
 }) => {
@@ -45,10 +45,11 @@ export const FormPreview: React.FC<FormPreviewProps> = ({
             </svg>
           </div>
           <h3 className="text-lg font-medium text-slate-600 mb-2">
-            No form to preview
+            No component to preview
           </h3>
           <p className="text-slate-500 max-w-sm">
-            Generate a form using the chat interface to see a live preview here.
+            Generate a component using the chat interface to see a live preview
+            here.
           </p>
         </div>
       </div>
@@ -101,7 +102,7 @@ export const FormPreview: React.FC<FormPreviewProps> = ({
                 className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-200 shadow-lg hover:shadow-xl active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-blue-300/50 flex items-center justify-center gap-3"
               >
                 <CheckCircle className="h-5 w-5" />
-                Submit Form
+                Submit
               </button>
             </div>
           </form>
@@ -111,4 +112,4 @@ export const FormPreview: React.FC<FormPreviewProps> = ({
   );
 };
 
-export default FormPreview;
+export default ComponentPreview;

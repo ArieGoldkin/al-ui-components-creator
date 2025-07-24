@@ -13,18 +13,18 @@ const ChatMessageComponent: React.FC<ChatMessageProps> = ({ message }) => {
   return (
     <div
       className={cn(
-        "flex gap-3 mb-6 animate-in fade-in-0 slide-in-from-bottom-2 duration-300",
+        "flex gap-4 mb-8 animate-in fade-in-0 slide-in-from-bottom-2 duration-300",
         isUser ? "flex-row-reverse" : "flex-row"
       )}
     >
       {/* Avatar */}
-      <div className="flex-shrink-0 mt-1">
+      <div className="flex-shrink-0 mt-0.5">
         {isUser ? (
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 flex items-center justify-center shadow-lg ring-2 ring-blue-100">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 flex items-center justify-center shadow-md ring-1 ring-blue-200/50">
             <User className="h-4 w-4 text-white" />
           </div>
         ) : (
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600 flex items-center justify-center shadow-lg ring-2 ring-emerald-100">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600 flex items-center justify-center shadow-md ring-1 ring-emerald-200/50">
             <Bot className="h-4 w-4 text-white" />
           </div>
         )}
@@ -33,14 +33,14 @@ const ChatMessageComponent: React.FC<ChatMessageProps> = ({ message }) => {
       {/* Message Content */}
       <div
         className={cn(
-          "flex-1 min-w-0 max-w-[85%]",
+          "flex-1 min-w-0 max-w-[90%]",
           isUser ? "flex flex-col items-end" : "flex flex-col items-start"
         )}
       >
         {/* Message Label */}
         <div
           className={cn(
-            "text-xs font-medium mb-2 px-1",
+            "text-xs font-semibold mb-2 px-1",
             isUser ? "text-blue-600" : "text-emerald-600"
           )}
         >
@@ -52,17 +52,17 @@ const ChatMessageComponent: React.FC<ChatMessageProps> = ({ message }) => {
           className={cn(
             "relative px-4 py-3 rounded-2xl shadow-sm border backdrop-blur-sm transition-all duration-200 hover:shadow-md",
             isUser
-              ? "bg-gradient-to-br from-blue-500 to-blue-600 text-white border-blue-400/20 rounded-br-md"
-              : "bg-gradient-to-br from-white to-slate-50/80 text-slate-800 border-slate-200/60 rounded-bl-md"
+              ? "bg-gradient-to-br from-blue-500 to-blue-600 text-white border-blue-400/20"
+              : "bg-gradient-to-br from-white to-slate-50/80 text-slate-800 border-slate-200/60"
           )}
         >
-          {/* Message Tail */}
+          {/* Message Tail - Improved positioning */}
           <div
             className={cn(
-              "absolute w-3 h-3 transform rotate-45 border",
+              "absolute w-2 h-2 transform rotate-45",
               isUser
-                ? "bg-gradient-to-br from-blue-500 to-blue-600 border-blue-400/20 -bottom-1 right-3"
-                : "bg-gradient-to-br from-white to-slate-50/80 border-slate-200/60 -bottom-1 left-3"
+                ? "bg-blue-500 -bottom-1 -right-1"
+                : "bg-white -bottom-1 -left-1"
             )}
           />
 

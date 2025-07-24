@@ -28,38 +28,41 @@ describe("ChatSidebar", () => {
       render(<ChatSidebar {...defaultProps} />);
 
       expect(
-        screen.getByText("Let's build your form together! ✨")
+        screen.getByText("Let's build your component together! ✨")
       ).toBeInTheDocument();
       expect(
-        screen.getByPlaceholderText("Describe your form in detail... ✨")
+        screen.getByPlaceholderText("Describe your component in detail... ✨")
       ).toBeInTheDocument();
       expect(screen.getByRole("button", { name: /send/i })).toBeInTheDocument();
+
+      // Check that category selector is rendered
+      expect(screen.getByText("Choose a Category")).toBeInTheDocument();
     });
 
     it("renders messages when provided", () => {
       const messages: ChatMessage[] = [
         createMockChatMessage({
           role: "user",
-          content: "Create a contact form",
+          content: "Create a navbar component",
         }),
         createMockChatMessage({
           role: "assistant",
-          content: "I'll create a contact form for you.",
+          content: "I'll create a navbar component for you.",
         }),
       ];
 
       render(<ChatSidebar {...defaultProps} messages={messages} />);
 
-      expect(screen.getByText("Create a contact form")).toBeInTheDocument();
+      expect(screen.getByText("Create a navbar component")).toBeInTheDocument();
       expect(
-        screen.getByText("I'll create a contact form for you.")
+        screen.getByText("I'll create a navbar component for you.")
       ).toBeInTheDocument();
     });
 
     it("renders loading state correctly", () => {
       render(<ChatSidebar {...defaultProps} isLoading={true} />);
 
-      expect(screen.getByText("Generating form...")).toBeInTheDocument();
+      expect(screen.getByText("Generating component...")).toBeInTheDocument();
       expect(screen.getByText("AI Assistant")).toBeInTheDocument();
     });
 
@@ -70,7 +73,7 @@ describe("ChatSidebar", () => {
       expect(screen.getByText(error)).toBeInTheDocument();
       // The error is displayed but the interface remains the same
       expect(
-        screen.getByPlaceholderText("Describe your form in detail... ✨")
+        screen.getByPlaceholderText("Describe your component in detail... ✨")
       ).toBeInTheDocument();
     });
   });
@@ -81,7 +84,7 @@ describe("ChatSidebar", () => {
       render(<ChatSidebar {...defaultProps} />);
 
       const input = screen.getByPlaceholderText(
-        "Describe your form in detail... ✨"
+        "Describe your component in detail... ✨"
       );
       const sendButton = screen.getByRole("button", { name: /send/i });
 
@@ -99,7 +102,7 @@ describe("ChatSidebar", () => {
       render(<ChatSidebar {...defaultProps} />);
 
       const input = screen.getByPlaceholderText(
-        "Describe your form in detail... ✨"
+        "Describe your component in detail... ✨"
       );
 
       await user.type(input, "Create a signup form");
@@ -125,7 +128,7 @@ describe("ChatSidebar", () => {
       render(<ChatSidebar {...defaultProps} isLoading={true} />);
 
       const input = screen.getByPlaceholderText(
-        "Describe your form in detail... ✨"
+        "Describe your component in detail... ✨"
       );
       const sendButton = screen.getByRole("button", { name: /send/i });
 
@@ -142,7 +145,7 @@ describe("ChatSidebar", () => {
       // In this implementation, there's no separate retry button
       // The user can just send another message to retry
       const input = screen.getByPlaceholderText(
-        "Describe your form in detail... ✨"
+        "Describe your component in detail... ✨"
       );
       const sendButton = screen.getByRole("button", { name: /send/i });
 
@@ -150,6 +153,22 @@ describe("ChatSidebar", () => {
       await user.click(sendButton);
 
       expect(mockFunctions.onSendMessage).toHaveBeenCalledWith("Retry message");
+    });
+
+    it("sends message when category is selected", async () => {
+      const user = userEvent.setup();
+      render(<ChatSidebar {...defaultProps} />);
+
+      // Find and click a category button (Forms & Inputs)
+      const formsButton = screen.getByLabelText(
+        "Select Forms & Inputs category"
+      );
+      await user.click(formsButton);
+
+      // Check that the message is sent directly with the suggested prompt
+      expect(mockFunctions.onSendMessage).toHaveBeenCalledWith(
+        "Create a contact form with name, email, and message fields with validation"
+      );
     });
   });
 
@@ -202,7 +221,7 @@ describe("ChatSidebar", () => {
       render(<ChatSidebar {...defaultProps} />);
 
       const input = screen.getByPlaceholderText(
-        "Describe your form in detail... ✨"
+        "Describe your component in detail... ✨"
       );
       const sendButton = screen.getByRole("button", { name: /send/i });
 
@@ -216,14 +235,22 @@ describe("ChatSidebar", () => {
       render(<ChatSidebar {...defaultProps} />);
 
       const input = screen.getByPlaceholderText(
-        "Describe your form in detail... ✨"
+        "Describe your component in detail... ✨"
       );
 
+      // First tab goes to the first category button
       await user.tab();
-      expect(input).toHaveFocus();
+      const firstCategoryButton = screen.getByLabelText(
+        "Select Forms & Inputs category"
+      );
+      expect(firstCategoryButton).toHaveFocus();
 
-      // The send button is disabled when there's no text, so it won't receive focus
-      // This test verifies that the input can be focused via keyboard
+      // Continue tabbing to reach the input field (skip through category buttons)
+      await user.tab(); // Navigation category
+      await user.tab(); // Data Display category
+      await user.tab(); // Feedback category
+      await user.tab(); // Layout category
+      await user.tab(); // Input field
       expect(input).toHaveFocus();
     });
   });

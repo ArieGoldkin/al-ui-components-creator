@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Send, Bot } from "lucide-react";
-import type { ChatMessage } from "../types";
+import type { ChatMessage, ComponentCategory } from "../types";
 import { cn } from "../lib/utils";
 import LoadingSpinner from "./LoadingSpinner";
 import ChatMessageComponent from "./ChatMessage";
@@ -58,15 +58,20 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({
     }
   };
 
+  const handleCategorySelect = (category: ComponentCategory) => {
+    // Send the message directly when a category is selected
+    onSendMessage(category.suggestedPrompt);
+  };
+
   return (
     <div className="h-full flex flex-col bg-gradient-to-b from-white via-slate-50/50 to-slate-100/30 border-r border-slate-200/60 backdrop-blur-xl">
       <ChatHeader />
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto">
-        <div className="p-6 pb-4">
+        <div className="p-4 pb-4">
           {messages.length === 0 ? (
-            <ChatEmptyState />
+            <ChatEmptyState onCategorySelect={handleCategorySelect} />
           ) : (
             <div className="space-y-1">
               {messages.map((message, index) => (
@@ -78,7 +83,7 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({
 
         {/* Loading indicator */}
         {isLoading && (
-          <div className="px-6 pb-4">
+          <div className="px-4 pb-4">
             <div className="flex items-start gap-3 mb-6 animate-in fade-in-0 slide-in-from-bottom-2 duration-300">
               <div className="flex-shrink-0 mt-1">
                 <div className="w-9 h-9 bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600 rounded-full flex items-center justify-center shadow-lg ring-2 ring-emerald-100">
@@ -92,7 +97,7 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({
                 <div className="relative px-4 py-3 rounded-2xl rounded-bl-md shadow-sm border backdrop-blur-sm bg-gradient-to-br from-white to-slate-50/80 border-slate-200/60">
                   <div className="absolute w-3 h-3 transform rotate-45 border bg-gradient-to-br from-white to-slate-50/80 border-slate-200/60 -bottom-1 left-3" />
                   <div className="relative z-10">
-                    <LoadingSpinner size="sm" text="Generating form..." />
+                    <LoadingSpinner size="sm" text="Generating component..." />
                   </div>
                 </div>
               </div>
@@ -102,14 +107,14 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({
 
         {/* Error message */}
         {error && (
-          <div className="px-6 pb-4">
+          <div className="px-4 pb-4">
             <ErrorMessage error={error} onRetry={onRetry} />
           </div>
         )}
       </div>
 
       {/* Input */}
-      <div className="p-6 border-t border-slate-200/60 bg-gradient-to-r from-white/98 to-slate-50/98 backdrop-blur-sm">
+      <div className="p-4 border-t border-slate-200/60 bg-gradient-to-r from-white/98 to-slate-50/98 backdrop-blur-sm">
         <form onSubmit={handleSubmit}>
           <div className="relative bg-white/98 border border-slate-200/60 rounded-2xl shadow-sm transition-all duration-300 focus-within:border-blue-400 focus-within:ring-4 focus-within:ring-blue-100/50 focus-within:shadow-lg focus-within:bg-white hover:shadow-md">
             <div className="flex items-end">
@@ -119,7 +124,7 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder="Describe your form in detail... ✨"
+                  placeholder="Describe your component in detail... ✨"
                   className="w-full resize-none bg-transparent px-4 py-3.5 text-sm placeholder-slate-400 border-0 outline-none focus:outline-none focus:ring-0 min-h-[52px] leading-6 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{
                     height: "52px",

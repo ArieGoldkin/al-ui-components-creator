@@ -22,7 +22,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({ error, onRetry }) => {
             <button
               onClick={onRetry}
               className="mt-3 inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-red-700 bg-red-100 hover:bg-red-200 rounded-xl transition-all duration-200 hover:shadow-md active:scale-95 focus:outline-none focus:ring-2 focus:ring-red-300/50"
-              aria-label="Retry generating form"
+              aria-label="Retry generating component"
             >
               <svg
                 className="w-3 h-3"

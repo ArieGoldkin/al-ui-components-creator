@@ -1,6 +1,6 @@
-# 🤖 AI Form Creator
+# 🤖 AI Component Builder
 
-> **An intelligent form builder that transforms natural language descriptions into beautiful, functional React forms with validation**
+> **An intelligent component generator that transforms natural language descriptions into beautiful, functional React components with modern UI libraries**
 
 [![CI/CD Pipeline](https://github.com/ArieGoldkin/al-ui-components-creator/actions/workflows/ci.yml/badge.svg)](https://github.com/ArieGoldkin/al-ui-components-creator/actions/workflows/ci.yml)
 [![React](https://img.shields.io/badge/React-19.1.0-blue.svg)](https://reactjs.org/)
@@ -14,10 +14,10 @@
 
 ## ✨ Features
 
-- 🧠 **AI-Powered Generation**: Describe your form in natural language and watch it come to life
+- 🧠 **AI-Powered Generation**: Describe your component in natural language and watch it come to life
 - 🎨 **Modern UI/UX**: Beautiful, responsive design with smooth animations and modern chat interface
-- ⚡ **Real-time Preview**: See your form update instantly as you type
-- 🔧 **Form Validation**: Built-in validation with Zod and React Hook Form
+- ⚡ **Real-time Preview**: See your component update instantly as you type
+- 🔧 **Multiple Component Types**: Navigation, data display, feedback, and form components
 - 📱 **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
 - 🎯 **TypeScript Support**: Full type safety throughout the application
 - 🚀 **Fast Development**: Hot reload, instant resizing, and optimized build process
@@ -270,26 +270,27 @@ This will clean all build artifacts, remove the virtual environment, and set up 
 
 ## 🎯 How It Works
 
-1. **Describe Your Form**: Use natural language to describe what kind of form you need
+1. **Describe Your Component**: Use natural language to describe what kind of component you need
 
    ```
-   "Create a contact form with name, email, and message fields"
-   "Make a signup form with password validation"
-   "Build a registration form with dropdown options"
+   "Create a responsive navbar with logo and menu items"
+   "Make a data table with sorting and filtering"
+   "Build a confirmation modal dialog"
+   "Design a contact form with validation"
    ```
 
 2. **AI Generation**: The AI processes your description and generates:
 
-   - Form schema with proper field types
-   - Validation rules using Zod
-   - React component code with TypeScript
+   - Component-specific code using shadcn/ui and Radix UI
+   - Proper TypeScript interfaces and validation
+   - React component code with modern patterns
 
-3. **Live Preview**: See your form rendered in real-time with:
+3. **Live Preview**: See your component rendered in real-time with:
 
-   - Interactive form fields
-   - Validation feedback
+   - Interactive component elements
    - Responsive design
-   - Modern styling
+   - Modern styling with Tailwind CSS
+   - Accessibility features
 
 4. **Copy & Use**: Get the generated React component code ready to use in your projects
 
@@ -300,7 +301,7 @@ graph TB
     A[User Input] --> B[AI Chat Interface]
     B --> C[Flask Backend]
     C --> D[Anthropic Claude API]
-    D --> E[Form Schema Generation]
+    D --> E[Component Generation]
     E --> F[React Component Code]
     F --> G[Live Preview]
     G --> H[User Feedback]
@@ -324,7 +325,7 @@ graph TB
 
 - 🐍 **Python 3.9+** - Modern Python with type hints
 - 🌶️ **Flask 3.1.1** - Lightweight web framework
-- 🤖 **Anthropic Claude 0.59.0** - Advanced AI for form generation
+- 🤖 **Anthropic Claude 0.59.0** - Advanced AI for component generation
 - 🔄 **Flask-CORS** - Cross-origin resource sharing
 - 🔐 **python-dotenv** - Environment variable management
 - 🧪 **pytest 8.4.1** - Python testing framework
@@ -365,7 +366,7 @@ cd backend && python -m pytest -v
 
 - **API Endpoints**: Chat endpoint with full request/response cycle
 - **Error Handling**: Validation, API errors, malformed responses, fallbacks
-- **Integration**: End-to-end message processing and form generation
+- **Integration**: End-to-end message processing and component generation
 - **CORS & Security**: Cross-origin headers and request validation
 
 ### 🔄 CI/CD Integration
@@ -435,7 +436,7 @@ Check the current build status: [![CI Pipeline](https://github.com/ArieGoldkin/a
 Create a `.env` file in the `backend/` directory:
 
 ```env
-# Required: Anthropic API key for AI form generation
+# Required: Anthropic API key for AI component generation
 ANTHROPIC_API_KEY=your_anthropic_api_key_here
 
 # Optional: Flask configuration
@@ -534,7 +535,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-**Made with ❤️ by the AI Form Creator Team**
+**Made with ❤️ by the AI Component Builder Team**
 
 [Report Bug](https://github.com/ArieGoldkin/al-ui-components-creator/issues) · [Request Feature](https://github.com/ArieGoldkin/al-ui-components-creator/issues) · [Documentation](https://github.com/ArieGoldkin/al-ui-components-creator/wiki)
 
