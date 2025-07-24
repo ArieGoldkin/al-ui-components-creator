@@ -15,8 +15,8 @@ export const useFormPreview = (formSchema: FormSchema) => {
   });
 
   const onSubmit = (data: Record<string, unknown>) => {
-    console.log("Form submitted:", data);
-    alert("Form submitted successfully! Check console for data.");
+    console.log("Component data:", data);
+    alert("Component submitted successfully! Check console for data.");
   };
 
   return {

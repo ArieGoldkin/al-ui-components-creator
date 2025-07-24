@@ -27,21 +27,24 @@ def client():
 
 @pytest.fixture
 def mock_anthropic_client():
-    """Mock the Anthropic client for testing."""
-    with patch("app.client") as mock_client:
+    """Mock the AI service for testing."""
+    with patch("app.ai_service") as mock_ai_service:
         # Configure the mock to return a successful response
-        mock_response = Mock()
-        mock_response.content = [
-            Mock(
-                text=(
-                    '{"title": "Test Form", "fields": [{"id": "test", '
-                    '"type": "text", "label": "Test Field", '
-                    '"required": true}], "code": "test code"}'
-                )
-            )
-        ]
-        mock_client.messages.create.return_value = mock_response
-        yield mock_client
+        mock_ai_service.generate_component.return_value = {
+            "schema": {
+                "title": "Test Form",
+                "fields": [
+                    {
+                        "id": "test",
+                        "type": "text",
+                        "label": "Test Field",
+                        "required": True
+                    }
+                ]
+            },
+            "code": "test code"
+        }
+        yield mock_ai_service
 
 
 @pytest.fixture

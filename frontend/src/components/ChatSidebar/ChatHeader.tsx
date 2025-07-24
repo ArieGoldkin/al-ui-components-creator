@@ -9,7 +9,7 @@ const ChatHeader: React.FC = () => {
         </div>
         <div>
           <h2 className="text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-            AI Form Builder
+            AI Component Builder
           </h2>
           <div className="flex items-center gap-2 mt-1">
             <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
@@ -18,7 +18,7 @@ const ChatHeader: React.FC = () => {
         </div>
       </div>
       <p className="text-sm text-slate-600 leading-relaxed bg-slate-50/80 rounded-lg px-3 py-2 border border-slate-200/40">
-        💬 Describe the form you want to create
+        💬 Describe the component you want to create
       </p>
     </div>
   );

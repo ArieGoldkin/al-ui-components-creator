@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Menu, X, GripVertical } from "lucide-react";
 import { cn } from "../lib/utils";
 import ChatSidebar from "./ChatSidebar";
-import FormPreview from "./FormPreview";
+import ComponentPreview from "./ComponentPreview";
 import CodePanel from "./CodePanel";
 import { useResizableSidebar } from "../hooks/useResizableSidebar";
 import type { AppState } from "../types";
@@ -135,7 +135,7 @@ const Layout: React.FC<LayoutProps> = ({ state, onSendMessage, onRetry }) => {
                 <div className="w-4 h-4 bg-white rounded-sm opacity-90"></div>
               </div>
               <h1 className="text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-                AI Form Builder
+                AI Component Builder
               </h1>
             </div>
             <button
@@ -154,9 +154,9 @@ const Layout: React.FC<LayoutProps> = ({ state, onSendMessage, onRetry }) => {
         {/* Content area - Scrollable with smooth behavior */}
         <div className="flex-1 overflow-y-auto overflow-x-hidden scroll-smooth scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent hover:scrollbar-thumb-slate-400">
           <div className="min-h-full flex flex-col gap-2 p-2 lg:p-3">
-            {/* Form preview */}
+            {/* Component preview */}
             <div className="flex-1 min-h-[400px] backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 transition-all duration-300 hover:shadow-2xl overflow-hidden">
-              <FormPreview formSchema={state.currentSchema} />
+              <ComponentPreview formSchema={state.currentSchema} />
             </div>
 
             {/* Code panel */}
