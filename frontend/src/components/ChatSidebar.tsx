@@ -95,7 +95,7 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({
                   AI Assistant
                 </div>
                 <div className="relative px-4 py-3 rounded-2xl rounded-bl-md shadow-sm border backdrop-blur-sm bg-gradient-to-br from-white to-slate-50/80 border-slate-200/60">
-                  <div className="absolute w-3 h-3 transform rotate-45 border bg-gradient-to-br from-white to-slate-50/80 border-slate-200/60 -bottom-1 left-3" />
+                  <div className="absolute w-3 h-3 transform rotate-45 bg-gradient-to-br from-white to-slate-50/80 border border-slate-200/60 -bottom-1.5 left-2" />
                   <div className="relative z-10">
                     <LoadingSpinner size="sm" text="Generating component..." />
                   </div>

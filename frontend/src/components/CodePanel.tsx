@@ -38,8 +38,8 @@ const CodePanel: React.FC<CodePanelProps> = ({ code, className }) => {
               Generated code will appear here
             </h3>
             <p className="text-slate-500 text-sm">
-              React component code with validation will be displayed once a form
-              is generated
+              React component code will be displayed once a component is
+              generated
             </p>
           </div>
         </div>
@@ -99,7 +99,7 @@ const CodePanel: React.FC<CodePanelProps> = ({ code, className }) => {
           <div className="bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-slate-700/50">
             <div className="flex items-center justify-between px-6 py-3 bg-slate-800/80 backdrop-blur-sm">
               <span className="text-sm text-slate-300 font-mono font-medium">
-                FormComponent.tsx
+                Component.tsx
               </span>
               <div className="flex gap-2">
                 <div className="w-3 h-3 bg-red-500 rounded-full shadow-sm"></div>
@@ -121,19 +121,8 @@ const CodePanel: React.FC<CodePanelProps> = ({ code, className }) => {
                 <p className="text-sm text-blue-800 leading-relaxed">
                   <strong className="font-semibold">Usage:</strong> Copy this
                   code and save it as a new React component. Make sure you have
-                  the required dependencies installed:
-                  <code className="mx-1 px-2 py-0.5 bg-blue-100 rounded text-xs font-mono">
-                    react-hook-form
-                  </code>
-                  ,
-                  <code className="mx-1 px-2 py-0.5 bg-blue-100 rounded text-xs font-mono">
-                    zod
-                  </code>
-                  ,
-                  <code className="mx-1 px-2 py-0.5 bg-blue-100 rounded text-xs font-mono">
-                    @hookform/resolvers
-                  </code>
-                  .
+                  the required dependencies installed. Check the component
+                  preview for specific dependency requirements.
                 </p>
               </div>
             </div>
