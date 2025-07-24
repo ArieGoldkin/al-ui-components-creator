@@ -32,6 +32,10 @@ export interface FormSchema {
   title: string;
   description?: string;
   fields: FormField[];
+  // Extended properties for component builder
+  type?: string; // Component type (navigation, data_display, feedback, forms, etc.)
+  dependencies?: string[]; // Required packages/dependencies
+  usage?: string; // Usage example code
 }
 
 // Generic component types for the AI Component Builder

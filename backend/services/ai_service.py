@@ -101,7 +101,7 @@ class AIService:
             # Extract and parse response
             response_content = response.content[0].text
             logger.info(f"AI Service: Received response ({len(response_content)} characters)")
-            
+
             # Parse and validate response
             parsed_response = self._parse_response(response_content)
 
@@ -152,26 +152,43 @@ class AIService:
     def _parse_response(self, response_content: str) -> Dict[str, Any]:
         """
         Parse and validate AI response
-        
+
         Args:
             response_content: Raw response from Claude
-            
+
         Returns:
-            Parsed and validated response
-            
+            Parsed and validated response in expected format
+
         Raises:
             json.JSONDecodeError: If response is not valid JSON
         """
         parsed_response = json.loads(response_content)
-        
+
         # Basic validation of response structure
         if not isinstance(parsed_response, dict):
             raise json.JSONDecodeError("Response is not a JSON object", response_content, 0)
-        
-        # Ensure required fields exist
+
+        # Transform new response format to expected format
+        if "componentCode" in parsed_response:
+            # New enhanced format - transform to expected format
+            transformed_response = {
+                "code": parsed_response.get("componentCode", ""),
+                "schema": {
+                    "title": parsed_response.get("componentType", "Component").title() + " Component",
+                    "description": parsed_response.get("description", ""),
+                    "type": parsed_response.get("componentType", "general"),
+                    "dependencies": parsed_response.get("dependencies", []),
+                    "usage": parsed_response.get("usage", ""),
+                    "fields": []  # Components don't have form fields
+                }
+            }
+            logger.info("AI Service: Transformed enhanced response format to expected format")
+            return transformed_response
+
+        # Legacy format - check for expected fields
         if "code" not in parsed_response and "schema" not in parsed_response:
             logger.warning("AI Service: Response missing expected fields (code/schema)")
-        
+
         return parsed_response
     
 

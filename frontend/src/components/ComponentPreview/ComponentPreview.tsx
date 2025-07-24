@@ -2,7 +2,7 @@ import React from "react";
 import type { FormSchema } from "../../types";
 import { CheckCircle } from "lucide-react";
 import { cn } from "../../lib/utils";
-import { FormField, EmptyState } from "./components";
+import { FormField, EmptyState, NonFormComponentPreview } from "./components";
 import { useFormPreview } from "./hooks";
 
 interface ComponentPreviewProps {
@@ -56,7 +56,24 @@ export const ComponentPreview: React.FC<ComponentPreviewProps> = ({
     );
   }
 
+  // Check if this is a non-form component (has no fields but is a valid component)
+  const isNonFormComponent =
+    formSchema.type &&
+    formSchema.type !== "forms" &&
+    formSchema.type !== "form";
+
   if (!formSchema.fields || formSchema.fields.length === 0) {
+    // If it's a non-form component, show a component preview instead of empty state
+    if (isNonFormComponent) {
+      return (
+        <NonFormComponentPreview
+          formSchema={formSchema}
+          className={className}
+        />
+      );
+    }
+
+    // For form components with no fields, show the empty state
     return <EmptyState className={className} />;
   }
 

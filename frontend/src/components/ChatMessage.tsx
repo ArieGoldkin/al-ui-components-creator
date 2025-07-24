@@ -13,18 +13,18 @@ const ChatMessageComponent: React.FC<ChatMessageProps> = ({ message }) => {
   return (
     <div
       className={cn(
-        "flex gap-4 mb-8 animate-in fade-in-0 slide-in-from-bottom-2 duration-300",
+        "flex gap-3 mb-6 animate-in fade-in-0 slide-in-from-bottom-2 duration-300",
         isUser ? "flex-row-reverse" : "flex-row"
       )}
     >
       {/* Avatar */}
-      <div className="flex-shrink-0 mt-0.5">
+      <div className="flex-shrink-0 mt-1">
         {isUser ? (
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 flex items-center justify-center shadow-md ring-1 ring-blue-200/50">
+          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 flex items-center justify-center shadow-lg ring-2 ring-blue-100">
             <User className="h-4 w-4 text-white" />
           </div>
         ) : (
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600 flex items-center justify-center shadow-md ring-1 ring-emerald-200/50">
+          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600 flex items-center justify-center shadow-lg ring-2 ring-emerald-100">
             <Bot className="h-4 w-4 text-white" />
           </div>
         )}
@@ -33,8 +33,8 @@ const ChatMessageComponent: React.FC<ChatMessageProps> = ({ message }) => {
       {/* Message Content */}
       <div
         className={cn(
-          "flex-1 min-w-0 max-w-[90%]",
-          isUser ? "flex flex-col items-end" : "flex flex-col items-start"
+          "flex flex-col items-start flex-1 min-w-0 max-w-[85%]",
+          isUser ? "items-end" : "items-start"
         )}
       >
         {/* Message Label */}
@@ -52,17 +52,17 @@ const ChatMessageComponent: React.FC<ChatMessageProps> = ({ message }) => {
           className={cn(
             "relative px-4 py-3 rounded-2xl shadow-sm border backdrop-blur-sm transition-all duration-200 hover:shadow-md",
             isUser
-              ? "bg-gradient-to-br from-blue-500 to-blue-600 text-white border-blue-400/20"
-              : "bg-gradient-to-br from-white to-slate-50/80 text-slate-800 border-slate-200/60"
+              ? "bg-gradient-to-br from-blue-500 to-blue-600 text-white border-blue-400/20 rounded-br-md"
+              : "bg-gradient-to-br from-white to-slate-50/80 text-slate-800 border-slate-200/60 rounded-bl-md"
           )}
         >
-          {/* Message Tail - Improved positioning */}
+          {/* Message Tail - Perfect gradient matching */}
           <div
             className={cn(
-              "absolute w-2 h-2 transform rotate-45",
+              "absolute w-3 h-3 transform rotate-45 -bottom-1.5",
               isUser
-                ? "bg-blue-500 -bottom-1 -right-1"
-                : "bg-white -bottom-1 -left-1"
+                ? "bg-gradient-to-br from-blue-500 to-blue-600 border border-blue-400/20 right-2"
+                : "bg-gradient-to-br from-white to-slate-50/80 border border-slate-200/60 left-2"
             )}
           />
 
