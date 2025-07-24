@@ -104,13 +104,20 @@ def chat():
                 }
             }), 500
 
-        data = request.get_json()
+        try:
+            data = request.get_json()
+        except Exception:
+            return jsonify({'error': {'type': 'validation_error', 'message': 'Invalid JSON format', 'retry': False}}), 400
 
         if not data or 'messages' not in data:
             return jsonify({'error': {'type': 'validation_error', 'message': 'Messages are required', 'retry': False}}), 400
 
         messages = data['messages']
-        
+
+        # Validate messages array is not empty
+        if not messages:
+            return jsonify({'error': {'type': 'validation_error', 'message': 'Messages array cannot be empty', 'retry': False}}), 400
+
         # Prepare messages for Claude API
         claude_messages = []
         for msg in messages:

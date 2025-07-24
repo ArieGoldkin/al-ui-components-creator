@@ -66,6 +66,22 @@ Build a simple local web application that lets the user create and modify web fo
 ./start-dev.sh
 ```
 
+### Testing Commands
+
+```bash
+# Run all tests
+pnpm test
+
+# Frontend tests with watch mode
+pnpm test:frontend:watch
+
+# Backend tests with coverage
+pnpm test:backend:coverage
+
+# Integration tests
+pnpm test:integration
+```
+
 ### Manual Setup
 
 ```bash
@@ -230,6 +246,67 @@ Copy-paste shadcn/ui components as individual files
 Use Tailwind classes for all styling
 Follow shadcn/ui component composition patterns
 Ensure all components are accessible via Radix UI primitives
+
+## Testing Requirements (MANDATORY)
+
+### When Adding New Components
+
+**Frontend Components:**
+
+- Create `ComponentName.test.tsx` alongside component file
+- Test rendering, props, user interactions, and error states
+- Achieve minimum 80% test coverage
+- Include accessibility tests
+
+**Backend Endpoints:**
+
+- Create `test_endpoint_name.py` for new API endpoints
+- Test success cases, validation, error handling
+- Mock external dependencies (Anthropic API)
+- Achieve minimum 80% test coverage
+
+### Test File Naming Convention
+
+```
+frontend/src/components/ComponentName.test.tsx
+frontend/src/hooks/useHookName.test.ts
+frontend/src/services/serviceName.test.ts
+backend/test_endpoint_name.py
+backend/test_feature_name.py
+```
+
+### Minimum Test Requirements
+
+**Every new component must include tests for:**
+
+1. **Rendering**: Component renders without crashing
+2. **Props**: Different prop combinations work correctly
+3. **User Interactions**: Click, type, submit events
+4. **Error States**: Error handling and display
+5. **Accessibility**: ARIA labels, keyboard navigation
+
+**Every new API endpoint must include tests for:**
+
+1. **Success Cases**: Valid requests return expected responses
+2. **Validation**: Invalid inputs return proper error messages
+3. **Error Handling**: External API failures are handled gracefully
+4. **Authentication**: Protected endpoints require proper auth
+5. **Edge Cases**: Boundary conditions and unusual inputs
+
+### Coverage Thresholds
+
+- **New Code**: 90% minimum coverage
+- **Overall Project**: 80-90% target coverage
+- **Critical Paths**: 95% minimum coverage
+
+### Running Tests Before Commit
+
+```bash
+# Required before any commit
+pnpm test:all
+pnpm lint
+pnpm type-check
+```
 
 ---
 

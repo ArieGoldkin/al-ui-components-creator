@@ -326,6 +326,56 @@ graph TB
 - 🔄 **Flask-CORS** - Cross-origin resource sharing
 - 🔐 **python-dotenv** - Environment variable management
 
+## 🧪 Testing
+
+**100% Test Coverage** - Comprehensive testing suite with 83 tests covering all functionality:
+
+### 📊 Test Statistics
+
+- ✅ **Frontend Tests**: 64/64 passing (Components, Hooks, Services)
+- ✅ **Backend Tests**: 19/19 passing (API, Error Handling, Integration)
+- ✅ **Total Coverage**: 83/83 tests passing
+
+### 🚀 Quick Start
+
+```bash
+# Run all tests (recommended)
+./scripts/run-all-tests.sh
+
+# Frontend tests only
+cd frontend && pnpm run test:run
+
+# Backend tests only
+cd backend && python -m pytest -v
+```
+
+### 🎯 Test Categories
+
+**Frontend Testing (Vitest + React Testing Library)**
+
+- **Components**: LoadingSpinner, ErrorBoundary, ChatSidebar, FormPreview
+- **Hooks**: useResizableSidebar with persistence and constraints
+- **Services**: API client with error handling and response transformation
+- **Features**: User interactions, accessibility, error boundaries, animations
+
+**Backend Testing (pytest + Flask)**
+
+- **API Endpoints**: Chat endpoint with full request/response cycle
+- **Error Handling**: Validation, API errors, malformed responses, fallbacks
+- **Integration**: End-to-end message processing and form generation
+- **CORS & Security**: Cross-origin headers and request validation
+
+### 🔄 CI/CD Integration
+
+- ✅ **Automated Testing**: Runs on all PRs and pushes to main
+- ✅ **Parallel Execution**: Frontend and backend tests run simultaneously
+- ✅ **Status Checks**: GitHub integration with pass/fail status
+- ✅ **Quality Gates**: All tests must pass before merge
+
+### 📚 Documentation
+
+For detailed testing guides, patterns, and troubleshooting, see our comprehensive [Testing Guide](docs/TESTING.md).
+
 ## 🚀 CI Pipeline
 
 Our lean and efficient GitHub Actions workflow focuses on essential quality checks:
