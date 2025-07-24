@@ -5,8 +5,9 @@
 [![CI/CD Pipeline](https://github.com/ArieGoldkin/al-ui-components-creator/actions/workflows/ci.yml/badge.svg)](https://github.com/ArieGoldkin/al-ui-components-creator/actions/workflows/ci.yml)
 [![React](https://img.shields.io/badge/React-19.1.0-blue.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-blue.svg)](https://www.typescriptlang.org/)
-[![Flask](https://img.shields.io/badge/Flask-2.3.3-green.svg)](https://flask.palletsprojects.com/)
+[![Flask](https://img.shields.io/badge/Flask-3.1.1-green.svg)](https://flask.palletsprojects.com/)
 [![Python](https://img.shields.io/badge/Python-3.9+-green.svg)](https://www.python.org/)
+[![Vite](https://img.shields.io/badge/Vite-7.0.6-646CFF.svg)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.0-38B2AC.svg)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code Quality](https://img.shields.io/badge/Code%20Quality-ESLint%20%7C%20Prettier%20%7C%20Black-brightgreen.svg)](https://github.com/ArieGoldkin/al-ui-components-creator/actions/workflows/ci.yml)
@@ -314,17 +315,19 @@ graph TB
 - 🔷 **TypeScript 5.8.3** - Type safety and better DX
 - 🎨 **Tailwind CSS 3.4.0** - Utility-first CSS framework
 - 📋 **React Hook Form 7.60.0** - Performant forms with validation
-- ✅ **Zod 4.0.5** - TypeScript-first schema validation
+- ✅ **Zod 4.0.8** - TypeScript-first schema validation
 - 🎭 **Lucide React** - Beautiful, customizable icons
-- ⚡ **Vite 4.5.3** - Fast build tool and dev server
+- ⚡ **Vite 7.0.6** - Fast build tool and dev server
+- 🧪 **Vitest 3.2.4** - Fast unit testing framework
 
 **Backend:**
 
 - 🐍 **Python 3.9+** - Modern Python with type hints
-- 🌶️ **Flask 2.3.3** - Lightweight web framework
-- 🤖 **Anthropic Claude** - Advanced AI for form generation
+- 🌶️ **Flask 3.1.1** - Lightweight web framework
+- 🤖 **Anthropic Claude 0.59.0** - Advanced AI for form generation
 - 🔄 **Flask-CORS** - Cross-origin resource sharing
 - 🔐 **python-dotenv** - Environment variable management
+- 🧪 **pytest 8.4.1** - Python testing framework
 
 ## 🧪 Testing
 
@@ -494,6 +497,30 @@ We welcome contributions! Here's how to get started:
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📋 Recent Updates
+
+### 🔄 Dependency Updates (Latest)
+
+**Major Version Updates:**
+
+- ⚡ **Vite**: 4.5.3 → 7.0.6 (Major performance and security improvements)
+- 🧪 **Vitest**: 1.6.1 → 3.2.4 (Enhanced testing capabilities)
+- 🌶️ **Flask**: 2.3.3 → 3.1.1 (Security patches and new features)
+- 🤖 **Anthropic SDK**: 0.25.0 → 0.59.0 (Latest API compatibility)
+- 🧪 **pytest**: 7.4.3 → 8.4.1 (Improved testing framework)
+
+**Minor Updates:**
+
+- ✅ **Zod**: 4.0.5 → 4.0.8 (Bug fixes and stability)
+- 🧪 **@testing-library/react**: 14.3.1 → 16.3.0 (React 19 compatibility)
+
+**Benefits:**
+
+- 🔒 **Enhanced Security**: Latest security patches and vulnerability fixes
+- ⚡ **Better Performance**: Faster build times and improved runtime performance
+- 🛠️ **Improved DX**: Better error messages and development experience
+- 🧪 **Testing Improvements**: More reliable and faster test execution
 
 ## 🙏 Acknowledgments
 
