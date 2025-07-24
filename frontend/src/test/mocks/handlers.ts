@@ -1,36 +1,36 @@
-import { http, HttpResponse } from 'msw'
-import type { ChatMessage, FormSchema } from '../../types'
+import { http, HttpResponse } from "msw";
+import type { ChatMessage, FormSchema } from "../../types";
 
-const API_BASE_URL = 'http://localhost:5001'
+const API_BASE_URL = "http://localhost:5001";
 
 // Mock form schema for testing
 const mockFormSchema: FormSchema = {
-  title: 'Contact Form',
-  description: 'A simple contact form',
+  title: "Contact Form",
+  description: "A simple contact form",
   fields: [
     {
-      id: 'name',
-      type: 'text',
-      label: 'Full Name',
-      placeholder: 'Enter your full name',
+      id: "name",
+      type: "text",
+      label: "Full Name",
+      placeholder: "Enter your full name",
       required: true,
     },
     {
-      id: 'email',
-      type: 'email',
-      label: 'Email Address',
-      placeholder: 'Enter your email',
+      id: "email",
+      type: "email",
+      label: "Email Address",
+      placeholder: "Enter your email",
       required: true,
       validation: {
-        pattern: '^[^@]+@[^@]+\\.[^@]+$',
-        patternMessage: 'Please enter a valid email address',
+        pattern: "^[^@]+@[^@]+\\.[^@]+$",
+        patternMessage: "Please enter a valid email address",
       },
     },
     {
-      id: 'message',
-      type: 'textarea',
-      label: 'Message',
-      placeholder: 'Enter your message',
+      id: "message",
+      type: "textarea",
+      label: "Message",
+      placeholder: "Enter your message",
       required: true,
       validation: {
         minLength: 10,
@@ -38,7 +38,7 @@ const mockFormSchema: FormSchema = {
       },
     },
   ],
-}
+};
 
 const mockGeneratedCode = `import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -80,25 +80,25 @@ export const ContactForm = () => {
       <button type="submit">Submit Form</button>
     </form>
   );
-};`
+};`;
 
 export const handlers = [
   // Health check endpoint
   http.get(`${API_BASE_URL}/health`, () => {
-    return HttpResponse.json({ status: 'healthy' })
+    return HttpResponse.json({ status: "healthy" });
   }),
 
   // Chat endpoint - successful response
   http.post(`${API_BASE_URL}/api/chat`, async ({ request }) => {
-    const body = await request.json() as { messages: ChatMessage[] }
-    
+    (await request.json()) as { messages: ChatMessage[] }; // Parse request but don't store unused variable
+
     // Simulate processing delay
-    await new Promise(resolve => setTimeout(resolve, 500))
-    
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
     return HttpResponse.json({
       schema: mockFormSchema,
       code: mockGeneratedCode,
-    })
+    });
   }),
 
   // Chat endpoint - error response (for testing error handling)
@@ -106,13 +106,13 @@ export const handlers = [
     return HttpResponse.json(
       {
         error: {
-          type: 'api_error',
-          message: 'Claude API error: Rate limit exceeded',
+          type: "api_error",
+          message: "Claude API error: Rate limit exceeded",
           retry: true,
         },
       },
       { status: 500 }
-    )
+    );
   }),
 
   // Chat endpoint - validation error
@@ -120,12 +120,12 @@ export const handlers = [
     return HttpResponse.json(
       {
         error: {
-          type: 'validation_error',
-          message: 'Messages are required',
+          type: "validation_error",
+          message: "Messages are required",
           retry: false,
         },
       },
       { status: 400 }
-    )
+    );
   }),
-]
+];

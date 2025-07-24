@@ -10,15 +10,16 @@ from unittest.mock import Mock, patch
 # Add the backend directory to the Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from app import app
+# Import after path setup
+from app import app  # noqa: E402
 
 
 @pytest.fixture
 def client():
     """Create a test client for the Flask app."""
-    app.config['TESTING'] = True
-    app.config['ANTHROPIC_API_KEY'] = 'test_key_for_testing'
-    
+    app.config["TESTING"] = True
+    app.config["ANTHROPIC_API_KEY"] = "test_key_for_testing"
+
     with app.test_client() as client:
         with app.app_context():
             yield client
@@ -27,11 +28,17 @@ def client():
 @pytest.fixture
 def mock_anthropic_client():
     """Mock the Anthropic client for testing."""
-    with patch('app.client') as mock_client:
+    with patch("app.client") as mock_client:
         # Configure the mock to return a successful response
         mock_response = Mock()
         mock_response.content = [
-            Mock(text='{"title": "Test Form", "fields": [{"id": "test", "type": "text", "label": "Test Field", "required": true}], "code": "test code"}')
+            Mock(
+                text=(
+                    '{"title": "Test Form", "fields": [{"id": "test", '
+                    '"type": "text", "label": "Test Field", '
+                    '"required": true}], "code": "test code"}'
+                )
+            )
         ]
         mock_client.messages.create.return_value = mock_response
         yield mock_client
@@ -42,7 +49,10 @@ def sample_chat_messages():
     """Sample chat messages for testing."""
     return [
         {"role": "user", "content": "Create a contact form"},
-        {"role": "assistant", "content": "I'll create a contact form for you."}
+        {
+            "role": "assistant",
+            "content": "I'll create a contact form for you.",
+        },
     ]
 
 
@@ -58,7 +68,7 @@ def sample_form_schema():
                 "type": "text",
                 "label": "Full Name",
                 "placeholder": "Enter your full name",
-                "required": True
+                "required": True,
             },
             {
                 "id": "email",
@@ -68,10 +78,10 @@ def sample_form_schema():
                 "required": True,
                 "validation": {
                     "pattern": "^[^@]+@[^@]+\\.[^@]+$",
-                    "patternMessage": "Please enter a valid email address"
-                }
-            }
-        ]
+                    "patternMessage": "Please enter a valid email address",
+                },
+            },
+        ],
     }
 
 
@@ -80,7 +90,7 @@ def mock_successful_api_response(sample_form_schema):
     """Mock a successful API response from Claude."""
     return {
         "schema": sample_form_schema,
-        "code": "const ContactForm = () => { return <form>...</form>; };"
+        "code": "const ContactForm = () => { return <form>...</form>; };",
     }
 
 
@@ -91,7 +101,7 @@ def mock_api_error_response():
         "error": {
             "type": "api_error",
             "message": "Claude API error: Rate limit exceeded",
-            "retry": True
+            "retry": True,
         }
     }
 
@@ -103,7 +113,7 @@ def mock_validation_error_response():
         "error": {
             "type": "validation_error",
             "message": "Messages are required",
-            "retry": False
+            "retry": False,
         }
     }
 
@@ -114,9 +124,5 @@ def pytest_configure(config):
     config.addinivalue_line(
         "markers", "integration: mark test as integration test"
     )
-    config.addinivalue_line(
-        "markers", "unit: mark test as unit test"
-    )
-    config.addinivalue_line(
-        "markers", "slow: mark test as slow running"
-    )
+    config.addinivalue_line("markers", "unit: mark test as unit test")
+    config.addinivalue_line("markers", "slow: mark test as slow running")
