@@ -230,6 +230,36 @@ pnpm run test
 pnpm run lint:fix
 ```
 
+## 🤖 AI Integration - Supabase MCP
+
+The AI Component Builder supports **Supabase Model Context Protocol (MCP)**, allowing AI development tools to interact directly with your Supabase database and project.
+
+### 🚀 Quick MCP Setup
+
+1. **Run the setup script**:
+
+   ```bash
+   ./scripts/setup-supabase-mcp.sh
+   ```
+
+2. **Or configure manually**:
+   - Get your Supabase Personal Access Token from [Settings](https://supabase.com/dashboard/account/tokens)
+   - Get your Project Reference from your project dashboard
+   - Update the configuration files with your credentials
+
+### 🎯 Supported AI Tools
+
+- **Cursor IDE** (`.cursor/mcp.json`)
+- **VS Code Copilot** (`.vscode/mcp.json`)
+- **Claude Desktop** (`.mcp.json`)
+- **Claude Code** (`.mcp.json`)
+- **Windsurf** (`.mcp.json`)
+- **Cline** (`.mcp.json`)
+
+### 📚 Documentation
+
+For detailed setup instructions, see [docs/SUPABASE_MCP_SETUP.md](docs/SUPABASE_MCP_SETUP.md)
+
 ## 🌐 Server Information
 
 - **Frontend Development Server**: http://localhost:3000
